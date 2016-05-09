@@ -5,6 +5,8 @@ package org.kir.resources;
  */
 import com.google.common.base.Optional;
 import com.codahale.metrics.annotation.Timed;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.kir.pojos.Saying;
 
 import javax.ws.rs.GET;
@@ -16,6 +18,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Path("/hello-world")
 @Produces(MediaType.APPLICATION_JSON)
+@Api("/hello-world")
 public class HelloWorldResource {
     private final String template;
     private final String defaultName;
@@ -29,6 +32,7 @@ public class HelloWorldResource {
 
     @GET
     @Timed
+    @ApiOperation("Sample endpoint with path param")
     public Saying sayHello(@QueryParam("name") Optional<String> name) {
         final String value = String.format(template, name.or(defaultName));
         return new Saying(counter.incrementAndGet(), value);

@@ -1,2 +1,7 @@
 template: Hello, %s!
 defaultName: Stranger
+
+# the only required property is resourcePackage, for more config options see below
+# <a comma separated string of the packages that contain your @Api annotated resources>
+swagger:
+  resourcePackage: org.kir.resources

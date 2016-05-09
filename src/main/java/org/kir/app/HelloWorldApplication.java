@@ -3,6 +3,8 @@ package org.kir.app;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.kir.config.HelloWorldConfiguration;
 import org.kir.healthchecks.TemplateHealthCheck;
 import org.kir.resources.HelloWorldResource;
@@ -23,7 +25,15 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
     @Override
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
-        // nothing to do yet
+        // swagger configurations start
+        bootstrap.addBundle(new SwaggerBundle<HelloWorldConfiguration>() {
+
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(HelloWorldConfiguration configuration) {
+                return configuration.swaggerBundleConfiguration;
+            }
+        });
+        //swagger configurations end
     }
 
     @Override
