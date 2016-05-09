@@ -5,6 +5,7 @@ package org.kir.resources;
  */
 import com.google.common.base.Optional;
 import com.codahale.metrics.annotation.Timed;
+import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.kir.pojos.Saying;
@@ -33,7 +34,7 @@ public class HelloWorldResource {
     @GET
     @Timed
     @ApiOperation("Sample endpoint with path param")
-    public Saying sayHello(@QueryParam("name") Optional<String> name) {
+    public Saying sayHello(@Auth @QueryParam("name") Optional<String> name) {
         final String value = String.format(template, name.or(defaultName));
         return new Saying(counter.incrementAndGet(), value);
     }
